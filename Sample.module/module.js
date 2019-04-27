@@ -1,4 +1,4 @@
-var belchmswitch_ = (function(){
+var belchmradio_ = (function(){
   return {
     init: function(){
       this.createListeners();
@@ -12,11 +12,12 @@ var belchmswitch_ = (function(){
     formLoaded: function(event){
       if(event.data.type === 'hsFormCallback' && event.data.eventName === 'onFormReady') {
         this.form = window.$('form[data-form-id="' + event.data.id + '"]');
-        this.form.find('.hs-form-booleancheckbox').each(function(i, elem){
-          this.classMe(window.$(elem).find('label'), "mdl-switch mdl-js-switch mdl-js-ripple-effect");
-          this.classMe(window.$(elem).find('label').find('span'), "mdl-switch__label");
-          this.classMe(window.$(elem).find('input'), "mdl-switch__input");
-        }.bind(this)) ;
+        this.form.find('li.hs-form-radio').each(function(i, elem){
+          this.classMe(window.$(elem).find('label'), "mdl-radio mdl-js-radio mdl-js-ripple-effect");
+        }.bind(this));
+        this.form.find('li.hs-form-radio input').each(function(i, elem){
+          this.classMe(window.$(elem), "mdl-radio__button");
+        }.bind(this));
       }
     },
     classMe: function(elem, cssClass){
@@ -24,4 +25,4 @@ var belchmswitch_ = (function(){
     }
   }
 })();
-belchmswitch_.init()
+belchmradio_.init();
