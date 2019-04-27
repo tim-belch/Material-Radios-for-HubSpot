@@ -1,28 +1,15 @@
-var belchmradio_ = (function(){
-  return {
-    init: function(){
-      this.createListeners();
-    },
-    createListeners: function(){
-      this.on("message", this.formLoaded.bind(this));
-    },
-    on: function(action, callback){
-      window.addEventListener(action, callback);
-    },
-    formLoaded: function(event){
-      if(event.data.type === 'hsFormCallback' && event.data.eventName === 'onFormReady') {
-        this.form = window.$('form[data-form-id="' + event.data.id + '"]');
-        this.form.find('li.hs-form-radio').each(function(i, elem){
-          this.classMe(window.$(elem).find('label'), "mdl-radio mdl-js-radio mdl-js-ripple-effect");
-        }.bind(this));
-        this.form.find('li.hs-form-radio input').each(function(i, elem){
-          this.classMe(window.$(elem), "mdl-radio__button");
-        }.bind(this));
-      }
-    },
-    classMe: function(elem, cssClass){
-      elem.addClass(cssClass);
-    }
-  }
-})();
-belchmradio_.init();
+{{ require_css("https://code.getmdl.io/1.3.0/material.indigo-pink.min.css") }}
+{{ require_js("https://cdn.jsdelivr.net/npm/enhanced-bind-polyfill@0.0.2/index.min.js", "head") }}
+{{ require_js("https://code.getmdl.io/1.3.0/material.min.js", "head") }}
+{% require_css %}
+<style>
+.hs-form .mdl-radio__inner-circle,
+.hs-form.mdl-radio__ripple-container .mdl-ripple,
+.hs-form .mdl-radio__ripple-container .mdl-ripple {
+  background: {{ module.primary_color.color }};
+}
+.hs-form .mdl-radio.is-checked .mdl-radio__outer-circle {
+  border-color: {{ module.primary_color.color }};
+}
+</style>
+{% end_require_css %}
